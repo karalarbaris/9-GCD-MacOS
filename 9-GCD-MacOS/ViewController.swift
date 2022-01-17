@@ -11,8 +11,10 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        runBackgorundCode1()
+       
+        
     }
 
     override var representedObject: Any? {
@@ -20,7 +22,18 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
+    
+    @objc func log(message: String) {
+        print("Printing message: \(message)")
+    }
+    
 
+    func runBackgorundCode1() {
+        performSelector(inBackground: #selector(log), with: "Hello world 1")
 
+        performSelector(onMainThread: #selector(log), with: "Hello world 2", waitUntilDone: false)
+        
+        log(message: "Hello world 3")
+    }
 }
 
