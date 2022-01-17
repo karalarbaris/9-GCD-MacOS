@@ -12,7 +12,7 @@ class ViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        runSynchronousCode()
+        runMultiprocessing1()
         
         
     }
@@ -60,16 +60,22 @@ class ViewController: NSViewController {
     }
     
     func runSynchronousCode() {
-       // asynchronous!
-       DispatchQueue.global().async {
-          print("Background thread 1")
-       }
-       print("Main thread 1")
-       // synchronous!
-       DispatchQueue.global().sync {
-          print("Background thread 2")
+        // asynchronous!
+        DispatchQueue.global().async {
+            print("Background thread 1")
+        }
+        print("Main thread 1")
+        // synchronous!
+        DispatchQueue.global().sync {
+            print("Background thread 2")
+        }
+        print("Main thread 2")
     }
-       print("Main thread 2")
+    
+    func runMultiprocessing1() {
+        DispatchQueue.concurrentPerform(iterations: 10) {
+            print($0)
+        }
     }
 }
 
